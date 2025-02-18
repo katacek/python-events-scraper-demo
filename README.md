@@ -18,7 +18,8 @@ As you can see there are a lot of upcoming events there. We will try to scrape a
 
 ## Creating Actor <a name="createActor"></a>
 
-1. Visit the page to be scraped and inspect it using browser developers tools (aka devTools) 
+1. Visit the page to be scraped and inspect it using browser developers tools (aka devTools)
+
 - page: https://www.python.org/events/
 - devTools: press **F12** or `Right-click` a page and select `Inspect`
 - in the `Elements tab`, look for the [`selector`](https://docs.apify.com/academy/concepts/css-selectors) for the content we want to scrape
@@ -28,22 +29,22 @@ As you can see there are a lot of upcoming events there. We will try to scrape a
 
 <img width="1708" alt="Screenshot 2025-02-13 at 15 41 51" src="https://github.com/user-attachments/assets/7e9bb163-aab5-4909-92dd-bd2891b540a2" />
 
-
 - you can test the selector the devtools directly, just put the `document.querySelector('.list-recent-events.menu li');` to the `Console tab` and see the result (it prints the first result)
 - if you do `document.querySelectorAll()`, it shows all the given elements
     - good selectors: **simple**, **human-readable**, **unique** and **semantically connected** to the data.
 
 <img width="671" alt="Screenshot 2025-02-13 at 15 48 39" src="https://github.com/user-attachments/assets/bf664c29-299d-48fb-9980-228b19de655a" />
 
-
-1. Create scraper from Apify templates
+2. Create Actor from Apify templates
+   
 - Visit https://console.apify.com/actors/development/my-actors and click `Develop new` on the top right corner
 - Under Python section, select `Start with Python` template
 - Check the basic structure, information about the template, … and click `Use this template`
     - there are also links to various resources / tutorial videos
 - name the actor 😁
 
-1. Source code adjustments
+3. Source code adjustments
+   
 - in the `main.py` , we are going to replace this part using the selectors we have found earlier
 - first, change line 31 as well
 
