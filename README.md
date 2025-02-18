@@ -13,7 +13,6 @@ Visit Python's official website events section: https://www.python.org/events/
 
 <img width="1231" alt="Screenshot 2025-02-18 at 1 13 43 AM" src="https://github.com/user-attachments/assets/3fc38cb5-0e2d-4d3f-9210-1036e687cfe3" />
 
-
 As you can see there are a lot of upcoming events there. We will try to scrape all the upcoming events with their dates and locations and make an Actor out of it, and, in the end, publish it to Apify Store so that anybody from the community can use it.
 
 ## Creating Actor <a name="createActor"></a>
@@ -151,7 +150,7 @@ apify login
 apify push
 ```
 
-![Screenshot 2025-02-13 at 17.35.32.png](attachment:0b9a75ee-489c-4a8d-a1a8-6d076c659e6d:Screenshot_2025-02-13_at_17.35.32.png)
+<img width="722" alt="Screenshot 2025-02-13 at 17 35 32" src="https://github.com/user-attachments/assets/35f0315e-7fb7-4396-a0ce-5c6785ad8f76" />
 
 Get you to the browser and see, it is there!
 
