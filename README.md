@@ -118,7 +118,6 @@ await Actor.push_data(events)
 ## Creating Actor through CLI <a name="actorCLI"></a>
 
 - general docs [here](https://docs.apify.com/platform/actors/development/quick-start/locally)
-- 
 
 ```python
 brew install apify-cli // npm -g install apify-cli
