@@ -1,80 +1,163 @@
-## Scrape single-page in Python template
+# Table of contents
+1. [Find upcoming Python events all around the world!](#introduction)
+2. [Creating Actor](#createActor)
+3. [Publishing Actor to Store](#publishing)
+4. [Monetizing Actor](#monetizing)
+5. [Creating Actor using CLI (command line interface)](#actorCLI)
 
-A template for [web scraping](https://apify.com/web-scraping) data from a single web page in Python. The URL of the web page is passed in via input, which is defined by the [input schema](https://docs.apify.com/platform/actors/development/input-schema). The template uses the [HTTPX](https://www.python-httpx.org) to get the HTML of the page and the [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) to parse the data from it. The data are then stored in a [dataset](https://docs.apify.com/sdk/python/docs/concepts/storages#working-with-datasets) where you can easily access them.
+## Find upcoming Python events all around the world! <a name="introduction"></a>
 
-The scraped data in this template are page headings but you can easily edit the code to scrape whatever you want from the page.
+We will try to find upcoming Python events all around the world, and the best website to find those is Python's official website.
 
-## Included features
+Visit Python's official website events section: https://www.python.org/events/
 
-- **[Apify SDK](https://docs.apify.com/sdk/python/)** for Python - a toolkit for building Apify [Actors](https://apify.com/actors) and scrapers in Python
-- **[Input schema](https://docs.apify.com/platform/actors/development/input-schema)** - define and easily validate a schema for your Actor's input
-- **[Request queue](https://docs.apify.com/sdk/python/docs/concepts/storages#working-with-request-queues)** - queues into which you can put the URLs you want to scrape
-- **[Dataset](https://docs.apify.com/sdk/python/docs/concepts/storages#working-with-datasets)** - store structured data where each object stored has the same attributes
-- **[HTTPX](https://www.python-httpx.org)** - library for making asynchronous HTTP requests in Python
-- **[Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)** - library for pulling data out of HTML and XML files
-
-## How it works
-
-1. `Actor.get_input()` gets the input where the page URL is defined
-2. `httpx.AsyncClient().get(url)` fetches the page
-3. `BeautifulSoup(response.content, 'lxml')` loads the page data and enables parsing the headings
-4. This parses the headings from the page and here you can edit the code to parse whatever you need from the page
-    ```python
-    for heading in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]):
-    ```
-5. `Actor.push_data(headings)` stores the headings in the dataset
-
-## Resources
-
-- [BeautifulSoup Scraper](https://apify.com/apify/beautifulsoup-scraper)
-- [Python tutorials in Academy](https://docs.apify.com/academy/python)
-- [Web scraping with Beautiful Soup and Requests](https://blog.apify.com/web-scraping-with-beautiful-soup/)
-- [Beautiful Soup vs. Scrapy for web scraping](https://blog.apify.com/beautiful-soup-vs-scrapy-web-scraping/)
-- [Integration with Make, GitHub, Zapier, Google Drive, and other apps](https://apify.com/integrations)
-- [Video guide on getting scraped data using Apify API](https://www.youtube.com/watch?v=ViYYDHSBAKM)
-- A short guide on how to build web scrapers using code templates:
-
-[web scraper template](https://www.youtube.com/watch?v=u-i-Korzf8w)
+<img width="1231" alt="Screenshot 2025-02-18 at 1 13 43 AM" src="https://github.com/user-attachments/assets/3fc38cb5-0e2d-4d3f-9210-1036e687cfe3" />
 
 
-## Getting started
+As you can see there are a lot of upcoming events there. We will try to scrape all the upcoming events with their dates and locations and make an Actor out of it, and, in the end, publish it to Apify Store so that anybody from the community can use it.
 
-For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-locally). To run the actor use the following command:
+## Creating Actor <a name="createActor"></a>
 
-```bash
-apify run
+1. Visit the page to be scraped and inspect it using browser developers tools (aka devTools) 
+- page: https://www.python.org/events/
+- devTools: press **F12** or `Right-click` a page and select `Inspect`
+- in the `Elements tab`, look for the [`selector`](https://docs.apify.com/academy/concepts/css-selectors) for the content we want to scrape
+    - (In Firefox it's called the **Inspector**). You can use this tab to inspect the page's HTML on the left hand side, and its CSS on the right. The items in the HTML view are called [**elements**](https://docs.apify.com/academy/concepts/html-elements).
+    - All elements are wrapped in the html tag such as <p> </p> for paragraph, <a /> for link, …
+    - using the selector tool, find the selector: `.list-recent-events.menu li`for our case
+
+<img width="1708" alt="Screenshot 2025-02-13 at 15 41 51" src="https://github.com/user-attachments/assets/7e9bb163-aab5-4909-92dd-bd2891b540a2" />
+
+
+- you can test the selector the devtools directly, just put the `document.querySelector('.list-recent-events.menu li');` to the `Console tab` and see the result (it prints the first result)
+- if you do `document.querySelectorAll()`, it shows all the given elements
+    - good selectors: **simple**, **human-readable**, **unique** and **semantically connected** to the data.
+
+<img width="671" alt="Screenshot 2025-02-13 at 15 48 39" src="https://github.com/user-attachments/assets/bf664c29-299d-48fb-9980-228b19de655a" />
+
+
+1. Create scraper from Apify templates
+- Visit https://console.apify.com/actors/development/my-actors and click `Develop new` on the top right corner
+- Under Python section, select `Start with Python` template
+- Check the basic structure, information about the template, … and click `Use this template`
+    - there are also links to various resources / tutorial videos
+- name the actor 😁
+
+1. Source code adjustments
+- in the `main.py` , we are going to replace this part using the selectors we have found earlier
+- first, change line 31 as well
+
+```python
+actor_input = await Actor.get_input() or {'url': 'https://www.python.org/events/'}
 ```
 
-## Deploy to Apify
+and the original selectors
 
-### Connect Git repository to Apify
+```python
+# Extract all headings from the page (tag name and text).
+headings = []
+for heading in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+    heading_object = {'level': heading.name, 'text': heading.text}
+    Actor.log.info(f'Extracted heading: {heading_object}')
+    headings.append(heading_object)
 
-If you've created a Git repository for the project, you can easily connect to Apify:
+# Save the extracted headings to the dataset, which is a table-like storage.
+await Actor.push_data(headings)
+```
 
-1. Go to [Actor creation page](https://console.apify.com/actors/new)
-2. Click on **Link Git Repository** button
+by those
 
-### Push project on your local machine to Apify
+```python
+def extract_event_data(html):
+            soup = BeautifulSoup(html, 'html.parser')
+            events = []
+            baseUrl = 'https://www.python.org'
+            
+            for event in soup.select('.list-recent-events.menu li'):
+                title_tag = event.select_one('.event-title a')
+                date_tag = event.select_one('time')
+                location_tag = event.select_one('.event-location')
+                
+                title = title_tag.get_text(strip=True) if title_tag else 'N/A'
+                url = title_tag['href'] if title_tag and 'href' in title_tag.attrs else 'N/A'
+                fullUrl = f"{baseUrl}{url}" if url else 'N/A'
+                date = date_tag.get_text(separator=' ', strip=True) if date_tag else 'N/A'
+                location = location_tag.get_text(strip=True) if location_tag else 'N/A'
+                
+                events.append({
+                    'title': title,
+                    'url': fullUrl,
+                    'date': date,
+                    'location': location
+                })
+            
+            return events
+ 
+# Extract all events from the page including basic info
+events = extract_event_data(response.content)
 
-You can also deploy the project on your local machine to Apify without the need for the Git repository.
+# Save the extracted headings to the dataset, which is a table-like storage.
+await Actor.push_data(events)
+```
 
-1. Log in to Apify. You will need to provide your [Apify API Token](https://console.apify.com/account/integrations) to complete this action.
+- now, just hit the button `Save, Build & Start`
+- the Actor starts and take you to the `Log` tab
+- results are in the `Output tab`
+    - can be exported in various formats
+    - can be also seen in datasets
 
-    ```bash
-    apify login
-    ```
+## Publishing Actor to Store <a name="publishing"></a>
 
-2. Deploy your Actor. This command will deploy and build the Actor on the Apify Platform. You can find your newly created Actor under [Actors -> My Actors](https://console.apify.com/actors?tab=my).
+- // TODO: extract info to say
+- docs [here](https://docs.apify.com/platform/actors/publishing/publish)
 
-    ```bash
-    apify push
-    ```
+## Monetizing Actor <a name="monetizing"></a>
 
-## Documentation reference
+- // TODO: extract info to say
+- basic info [here](https://docs.apify.com/platform/actors/publishing/monetize)
+- detailed info about pricing models [here](https://docs.apify.com/academy/get-most-of-actors/monetizing-your-actor)
 
-To learn more about Apify and Actors, take a look at the following resources:
+## Creating Actor through CLI <a name="actorCLI"></a>
 
-- [Apify SDK for JavaScript documentation](https://docs.apify.com/sdk/js)
-- [Apify SDK for Python documentation](https://docs.apify.com/sdk/python)
-- [Apify Platform documentation](https://docs.apify.com/platform)
-- [Join our developer community on Discord](https://discord.com/invite/jyEM2PRvMU)
+- general docs [here](https://docs.apify.com/platform/actors/development/quick-start/locally)
+- 
+
+```python
+brew install apify-cli // npm -g install apify-cli
+
+apify create
+```
+
+- select name, Python and `Start with Python` template
+
+<img width="930" alt="Screenshot 2025-02-13 at 17 08 09" src="https://github.com/user-attachments/assets/c745bb1b-7806-4471-b823-3222eb190267" />
+
+    
+
+```python
+cd your-actor-name
+```
+
+- navigate to [main.py](http://main.py) and the same part of the code to be replaced
+    - also the Actor.get_input() needs to be deleted
+
+<img width="1526" alt="Screenshot 2025-02-13 at 17 19 04" src="https://github.com/user-attachments/assets/b152f80f-fd2e-443e-a99a-069382548985" />
+
+
+- run `apify-run`  and see the results in `storage/dataset/default` folder 🚀
+
+<img width="1046" alt="Screenshot 2025-02-13 at 17 29 37" src="https://github.com/user-attachments/assets/96020e54-b134-4058-a4ee-52603344f8a2" />
+
+
+- push to apify platform
+
+```python
+apify login
+apify push
+```
+
+![Screenshot 2025-02-13 at 17.35.32.png](attachment:0b9a75ee-489c-4a8d-a1a8-6d076c659e6d:Screenshot_2025-02-13_at_17.35.32.png)
+
+Get you to the browser and see, it is there!
+
+<img width="1720" alt="Screenshot 2025-02-13 at 17 36 31" src="https://github.com/user-attachments/assets/14303513-09ef-43dc-b861-99ab87cf4de6" />
