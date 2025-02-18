@@ -1,4 +1,4 @@
-# Table of contents
+## Readme overview
 1. [Find upcoming Python events all around the world!](#introduction)
 2. [Creating Actor](#createActor)
 3. [Publishing Actor to Store](#publishing)
