@@ -108,12 +108,10 @@ await Actor.push_data(events)
 
 ## Publishing Actor to Store <a name="publishing"></a>
 
-- // TODO: extract info to say
 - docs [here](https://docs.apify.com/platform/actors/publishing/publish)
 
 ## Monetizing Actor <a name="monetizing"></a>
 
-- // TODO: extract info to say
 - basic info [here](https://docs.apify.com/platform/actors/publishing/monetize)
 - detailed info about pricing models [here](https://docs.apify.com/academy/get-most-of-actors/monetizing-your-actor)
 
@@ -132,8 +130,6 @@ apify create
 
 <img width="930" alt="Screenshot 2025-02-13 at 17 08 09" src="https://github.com/user-attachments/assets/c745bb1b-7806-4471-b823-3222eb190267" />
 
-    
-
 ```python
 cd your-actor-name
 ```
@@ -142,7 +138,6 @@ cd your-actor-name
     - also the Actor.get_input() needs to be deleted
 
 <img width="1526" alt="Screenshot 2025-02-13 at 17 19 04" src="https://github.com/user-attachments/assets/b152f80f-fd2e-443e-a99a-069382548985" />
-
 
 - run `apify-run`  and see the results in `storage/dataset/default` folder 🚀
 
