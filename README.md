@@ -5,6 +5,11 @@
 4. [Monetizing Actor](#monetizing)
 5. [Creating Actor using CLI (command line interface)](#actorCLI)
 
+## Prerequisities
+- [ ] Account on [Apify console](https://console.apify.com/): for creating Actor through web interface: 
+- [ ] Node.js version 18 or higher with NPM installed: for using [Apify CLI](https://docs.apify.com/cli/docs/installation)
+- [ ] Billing details and payment method set up: for Actor monetization
+
 ## Find upcoming Python events all around the world! <a name="introduction"></a>
 
 We will try to find upcoming Python events all around the world, and the best website to find those is Python's official website.
@@ -108,10 +113,19 @@ await Actor.push_data(events)
 
 ## Publishing Actor to Store <a name="publishing"></a>
 
+- Go to [Apify Console](https://console.apify.com/) to Actor detail page
+    - go to the `Publication tab`
+    - fill in all the details
+    - press `Publish to store`
+    - check it out by clicking on `Store` (main menu on the left) -> search for the name of your Actor
 - docs [here](https://docs.apify.com/platform/actors/publishing/publish)
+
+<img width="1231" alt="Screenshot 2025-02-19 at 9 13 34" src="https://github.com/user-attachments/assets/67587ad1-176b-429d-b58d-292662a24a29" />
+
 
 ## Monetizing Actor <a name="monetizing"></a>
 
+- at the `Actor detail` -> `Publication tab` open the `Monetization` card, follow the set up guide
 - basic info [here](https://docs.apify.com/platform/actors/publishing/monetize)
 - detailed info about pricing models [here](https://docs.apify.com/academy/get-most-of-actors/monetizing-your-actor)
 
