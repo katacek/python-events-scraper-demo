@@ -4,7 +4,7 @@
 3. [Publishing Actor to Store](#publishing)
 4. [Monetizing Actor](#monetizing)
 5. [Creating Actor using CLI (command line interface)](#actorCLI)
-6. [What next](#next)
+6. [What next (useful links)](#next)
 
 ## Prerequisities
 - [ ] Account on [Apify console](https://console.apify.com/): for creating Actor through web interface: 
@@ -171,9 +171,15 @@ Get you to the browser and see, it is there!
 
 <img width="1720" alt="Screenshot 2025-02-13 at 17 36 31" src="https://github.com/user-attachments/assets/14303513-09ef-43dc-b861-99ab87cf4de6" />
 
-## What next <a name="next"></a>
+## What next (useful links) <a name="next"></a>
 Did you enjoy scraping and want to learn more? Just check out one of the following links
-- [Apify web scraping academy](https://docs.apify.com/academy)
+- [Apify web scraping academy](https://docs.apify.com/academy) and for python [here](https://docs.apify.com/academy/python)
 - Step by step guide to extract data [here](https://docs.apify.com/academy/web-scraping-for-beginners/data-extraction/browser-devtools)
 - Looking for some inspiration what to build? Check the [ideas page](https://apify.com/ideas)
+- [Actor whitepaper](https://whitepaper.actor/)
+- [Apify open source fair share program](https://apify.com/partners/open-source-fair-share)
+- Create Actor from template [video](https://www.youtube.com/watch?v=u-i-Korzf8w&ab_channel=Apify)
+- How to build and monetize Actors on Apify Store - Earn passive income from your scrapers [video](https://www.youtube.com/watch?v=4nxStxC1BJM&t=709s&ab_channel=Apify)
+- Apify Discord [channel](https://discord.gg/jyEM2PRvMU)
+- Apify Actors developers [page](https://apify.com/partners/actor-developers}
 
