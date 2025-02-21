@@ -4,6 +4,7 @@
 3. [Publishing Actor to Store](#publishing)
 4. [Monetizing Actor](#monetizing)
 5. [Creating Actor using CLI (command line interface)](#actorCLI)
+6. [What next](#next)
 
 ## Prerequisities
 - [ ] Account on [Apify console](https://console.apify.com/): for creating Actor through web interface: 
@@ -169,3 +170,10 @@ apify push
 Get you to the browser and see, it is there!
 
 <img width="1720" alt="Screenshot 2025-02-13 at 17 36 31" src="https://github.com/user-attachments/assets/14303513-09ef-43dc-b861-99ab87cf4de6" />
+
+## What next <a name="next"></a>
+Did you enjoy scraping and want to learn more? Just check out one of the following links
+- [Apify web scraping academy](https://docs.apify.com/academy)
+- Step by step guide to extract data [here](https://docs.apify.com/academy/web-scraping-for-beginners/data-extraction/browser-devtools)
+- Looking for some inspiration what to build? Check the [ideas page](https://apify.com/ideas)
+
