@@ -58,9 +58,19 @@ As you can see there are a lot of upcoming events there. We will try to scrape a
 actor_input = await Actor.get_input() or {'url': 'https://www.python.org/events/'}
 ```
 
-and the original selectors
+and the original
 
 ```python
+# Create an asynchronous HTTPX client for making HTTP requests.
+    async with AsyncClient() as client:
+        # Fetch the HTML content of the page, following redirects if necessary.
+        Actor.log.info(f'Sending a request to {url}')
+        response = await client.get(url, follow_redirects=True)
+
+    # Parse the HTML content using Beautiful Soup and lxml parser.
+    soup = BeautifulSoup(response.content, 'lxml')
+
+
 # Extract all headings from the page (tag name and text).
 headings = []
 for heading in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
