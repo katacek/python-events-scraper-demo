@@ -36,6 +36,7 @@ As you can see there are a lot of upcoming events there. We will try to scrape a
 
 - you can test the selector the devtools directly, just put the `document.querySelector('.list-recent-events.menu li');` to the `Console tab` and see the result (it prints the first result)
 - if you do `document.querySelectorAll()`, it shows all the given elements
+- for filtering the happening ones, just do `document.querySelectorAll('.list-recent-events.menu li:not(.most-recent-events)');`
     - good selectors: **simple**, **human-readable**, **unique** and **semantically connected** to the data.
 
 <img width="671" alt="Screenshot 2025-02-13 at 15 48 39" src="https://github.com/user-attachments/assets/bf664c29-299d-48fb-9980-228b19de655a" />
