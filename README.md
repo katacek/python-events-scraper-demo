@@ -80,35 +80,45 @@ await Actor.push_data(headings)
 by those
 
 ```python
+# Defines a function to extract event details from the HTML response.
 def extract_event_data(html):
-            soup = BeautifulSoup(html, 'html.parser')
-            events = []
-            baseUrl = 'https://www.python.org'
-            
-            for event in soup.select('.list-recent-events.menu li'):
-                title_tag = event.select_one('.event-title a')
-                date_tag = event.select_one('time')
-                location_tag = event.select_one('.event-location')
-                
-                title = title_tag.get_text(strip=True) if title_tag else 'N/A'
-                url = title_tag['href'] if title_tag and 'href' in title_tag.attrs else 'N/A'
-                fullUrl = f"{baseUrl}{url}" if url else 'N/A'
-                date = date_tag.get_text(separator=' ', strip=True) if date_tag else 'N/A'
-                location = location_tag.get_text(strip=True) if location_tag else 'N/A'
-                
-                events.append({
-                    'title': title,
-                    'url': fullUrl,
-                    'date': date,
-                    'location': location
-                })
-            
-            return events
- 
-# Extract all events from the page including basic info
+    # Parses the HTML using BeautifulSoup.
+    soup = BeautifulSoup(html, 'html.parser')
+    # Initializes an empty events list and sets a baseUrl for constructing full URLs.
+    events = []
+    baseUrl = 'https://www.python.org'
+    
+    # Finds all <li> elements inside .list-recent-events.menu
+    for event in soup.select('.list-recent-events.menu li'):
+        # Extract the event title <a> element.
+        title_tag = event.select_one('.event-title a')
+        # Extract the event date inside a <time> tag.
+        date_tag = event.select_one('time')
+        # Extract the event location.
+        location_tag = event.select_one('.event-location')
+        
+        # Extracts text values and ensures they have default values ('N/A' if missing).
+        title = title_tag.get_text(strip=True) if title_tag else 'N/A'
+        url = title_tag['href'] if title_tag and 'href' in title_tag.attrs else 'N/A'
+        date = date_tag.get_text(separator=' ', strip=True) if date_tag else 'N/A'
+        location = location_tag.get_text(strip=True) if location_tag else 'N/A'
+        # Constructs the full event URL by appending the relative href to baseUrl.
+        fullUrl = f"{baseUrl}{url}" if url else 'N/A'
+        
+        # Adds the extracted data into the events list.
+        events.append({
+            'title': title,
+            'url': fullUrl,
+            'date': date,
+            'location': location
+        })
+    
+    return events
+
+# Calls the extract_event_data() function with the page’s HTML content.
 events = extract_event_data(response.content)
 
-# Save the extracted headings to the dataset, which is a table-like storage.
+# Saves the extracted event data to Apify’s dataset storage (like a database for structured data).
 await Actor.push_data(events)
 ```
 
