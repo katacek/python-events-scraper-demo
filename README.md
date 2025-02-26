@@ -78,7 +78,7 @@ As you can see there are a lot of upcoming events there. We will try to scrape a
 
 
 - in the `main.py` , we are going to replace this part using the selectors we have found earlier
-- first, change line 31 as well
+- first, change line 30 as well
 
 ```python
 actor_input = await Actor.get_input() or {'url': 'https://www.python.org/events/'}
