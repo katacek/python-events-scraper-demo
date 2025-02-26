@@ -4,7 +4,8 @@
 3. [Publishing Actor to Store](#publishing)
 4. [Monetizing Actor](#monetizing)
 5. [Creating Actor using CLI (command line interface)](#actorCLI)
-6. [What next (useful links)](#next)
+6. [Creating Actor using GitHub repository (command line interface)](#actorGithub)
+7. [What next (useful links)](#next)
 
 ## Prerequisities
 - [ ] Account on [Apify console](https://console.apify.com/): for creating Actor through web interface: 
@@ -186,6 +187,13 @@ apify push
 Get you to the browser and see, it is there!
 
 <img width="1720" alt="Screenshot 2025-02-13 at 17 36 31" src="https://github.com/user-attachments/assets/14303513-09ef-43dc-b861-99ab87cf4de6" />
+
+## Creating Actor through GitHub repository <a name="actorGithub"></a>
+
+You can easily create a new Actor from your github folder - just try to fork this repo to your workspace and follow [this](https://help.apify.com/en/articles/6985210-how-to-build-scrapers-from-a-git-repository) online guide. 
+
+<img width="1494" alt="Screenshot 2025-02-26 at 7 11 58" src="https://github.com/user-attachments/assets/09f64537-12a5-49c2-a0ec-0e42539a7cea" />
+
 
 ## What next (useful links) <a name="next"></a>
 Did you enjoy scraping and want to learn more? Just check out one of the following links
