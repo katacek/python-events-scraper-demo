@@ -190,8 +190,8 @@ apify create
 cd your-actor-name
 ```
 
-- navigate to [main.py](http://main.py) and the same part of the code to be replaced
-    - also the Actor.get_input() needs to be deleted
+- in the `input_schema.json` update the `prefill` and add `default` value for the start url for the `https://www.python.org/events/` as we did before
+- navigate to `main.py` and the same part of the code to be replaced
 
 <img width="1526" alt="Screenshot 2025-02-13 at 17 19 04" src="https://github.com/user-attachments/assets/b152f80f-fd2e-443e-a99a-069382548985" />
 
