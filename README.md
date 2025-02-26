@@ -51,7 +51,32 @@ As you can see there are a lot of upcoming events there. We will try to scrape a
 - name the actor 😁
 
 3. Source code adjustments
+
    
+- in the `input_schema.json` update the `prefill` and add `default` value for the start url
+
+```json
+{
+    "title": "Scrape data from a web page",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "url": {
+            "title": "URL of the page",
+            "type": "string",
+            "description": "The URL of website you want to get the data from.",
+            "editor": "textfield",
+            "prefill": "https://www.python.org/events/",
+            "default": "https://www.python.org/events/"
+        }
+    },
+    "required": ["url"]
+}
+```
+
+  <img width="980" alt="Screenshot 2025-02-26 at 7 23 02" src="https://github.com/user-attachments/assets/962fc1eb-1929-4aae-8551-42b023de6803" />
+
+
 - in the `main.py` , we are going to replace this part using the selectors we have found earlier
 - first, change line 31 as well
 
