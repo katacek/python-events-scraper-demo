@@ -152,7 +152,7 @@ await Actor.push_data(events)
 - the Actor starts and take you to the `Log` tab
 - results are in the `Output tab`
     - can be exported in various formats
-    - can be also seen in datasets
+    - can be also seen in Storages (main left menu) -> Datasets
 
 ## Publishing Actor to Store <a name="publishing"></a>
 
